@@ -69,7 +69,21 @@ class Release extends BaseController
             "db"=>$this->db->database,
         );
 
-        $table = "release";
+        //$table = "release";
+        $table = <<<EOT
+        (
+           SELECT 
+             a.ReleaseID, 
+             a.Release_subject, 
+             a.Release_description,
+             a.created_at,
+             a.updated_at,
+             a.deleted_at,
+             CONCAT_WS(' ', b.User_name, b.User_lastname_01) AS User_name
+           FROM `release` a
+           LEFT JOIN user b ON a.UserID = b.UserID
+        ) temp
+       EOT;
         $primaryKey = "ReleaseID";
 
         $columns = array(
@@ -86,27 +100,44 @@ class Release extends BaseController
                 "dt"=>2,
             ),
             array(
-                "db"=>"ReleaseID",
+                "db"=>"created_at",
                 "dt"=>3,
+            ),
+            array(
+                "db"=>"updated_at",
+                "dt"=>4,
+            ),
+            array(
+                "db"=>"User_name",
+                "dt"=>5,
+            ),
+            array(
+                "db"=>"ReleaseID",
+                "dt"=>6,
                 "formatter"=>function($d, $row){
                     return "<div class='btn-group'>
-                                  <button class='btn btn-sm btn-primary' data-id='".$row['ReleaseID']."' id='updateCountryBtn'>Update</button>
-                                  <button class='btn btn-sm btn-danger' data-id='".$row['ReleaseID']."' id='deleteCountryBtn'>Delete</button>
+                                  <button class='btn btn-sm btn-primary' data-id='".$row['ReleaseID']."' id='updateReleaseBtn'>Update</button>
+                                  <button class='btn btn-sm btn-danger' data-id='".$row['ReleaseID']."' id='deleteReleaseBtn'>Delete</button>
                              </div>";
                 }
             ),
         );
 
         echo json_encode(
-            \SSP::simple($_GET, $dbDetails, $table, $primaryKey, $columns)
+            //\SSP::simple($_GET, $dbDetails, $table, $primaryKey, $columns)
+            \SSP::complex ( $_GET, $dbDetails, $table, $primaryKey, $columns,null, $whereAll= "deleted_at IS NULL")
         );
     }
 
 
-    public function getCountryInfo(){
-        $countryModel = new \App\Models\Country();
-        $country_id = $this->request->getPost('country_id');
-        $info = $countryModel->find($country_id);
+    public function getReleaseInfo(){
+        $releaseModel = model('ReleaseModel');
+        $release_id = $this->request->getPost('release_id');
+        //var_dump($release_id);
+        // $releaseModel->
+        $info = $releaseModel->find($release_id);
+        //var_dump($info);
+        
         if($info){
             echo json_encode(['code'=>1, 'msg'=>'', 'results'=>$info]);
         }else{
@@ -114,23 +145,23 @@ class Release extends BaseController
         }
     }
 
-    public function updateCountry(){
-        $countryModel = new \App\Models\Country();
+    public function updateRelease(){
+        $releaseModel = model('ReleaseModel');
         $validation = \Config\Services::validation();
-        $cid = $this->request->getPost('cid');
+        $rid = $this->request->getPost('rid');
 
         $this->validate([
-            'country_name'=>[
-                 'rules'=>'required|is_unique[countries.country_name,id,'.$cid.']',
+            'release_subject'=>[
+                 'rules'=>'required|is_unique[release.Release_subject,ReleaseID,'.$rid.']',
                  'errors'=>[
-                      'required'=>'Country name is required',
-                      'is_unique'=>'This country is already exists'
+                      'required'=>'Release name is required',
+                      'is_unique'=>'This Release is already exists'
                  ]
             ],
-            'capital_city'=>[
+            'release_description'=>[
                   'rules'=>'required',
                   'errors'=>[
-                      'required'=>'Capital city is required'
+                      'required'=>'Description is required'
                   ]
             ]
         ]);
@@ -141,13 +172,13 @@ class Release extends BaseController
         }else{
             //Update country
             $data = [
-               'country_name'=>$this->request->getPost('country_name'),
-               'capital_city'=>$this->request->getPost('capital_city'),
+               'Release_subject'=>$this->request->getPost('release_subject'),
+               'Release_description'=>$this->request->getPost('release_description'),
             ];
-            $query = $countryModel->update($cid,$data);
+            $query = $releaseModel->update($rid,$data);
 
             if($query){
-                echo json_encode(['code'=>1, 'msg'=>'Country info have been updated successfully']);
+                echo json_encode(['code'=>1, 'msg'=>'Release info have been updated successfully']);
             }else{
                 echo json_encode(['code'=>0, 'msg'=>'Something went wrong']);
             }
@@ -155,13 +186,13 @@ class Release extends BaseController
     }
 
 
-    public function deleteCountry(){
-        $countryModel = new \App\Models\Country();
-        $country_id = $this->request->getPost('country_id');
-        $query = $countryModel->delete($country_id);
+    public function deleteRelease(){
+        $releaseModel = model('ReleaseModel');
+        $release_id = $this->request->getPost('release_id');
+        $query = $releaseModel->delete($release_id);
 
         if($query){
-            echo json_encode(['code'=>1,'msg'=>'Country deleted Successfully']);
+            echo json_encode(['code'=>1,'msg'=>'Release deleted Successfully']);
         }else{
             echo json_encode(['code'=>0,'msg'=>'Something went wrong']);
         }
