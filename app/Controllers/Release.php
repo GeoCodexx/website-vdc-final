@@ -98,6 +98,9 @@ class Release extends BaseController
             array(
                 "db"=>"Release_description",
                 "dt"=>2,
+                "formatter"=>function($d, $row){
+                    return substr($row['Release_description'], 0, 20).'...';
+                }
             ),
             array(
                 "db"=>"created_at",

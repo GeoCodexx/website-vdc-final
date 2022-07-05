@@ -7,7 +7,7 @@
             <div class="card-header">Lista de Comunicados</div>
             <div class="card-body">
         <br />
-        <button class="btn btn-info" onclick="add_person()"><i class="fas fa-plus"></i> Nuevo</button>
+        <button class="btn btn-success" id="addNewReleaseBtn"><i class="fas fa-plus"></i> Nuevo</button>
         <!--<button class="btn btn-default" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload</button>-->
         <br />
         <br />  
@@ -16,8 +16,8 @@
                         <th>#</th>
                         <th>Asunto</th> 
                         <th>Contenido</th>
-                        <th>Fecha Creación</th>
-                        <th>Fecha Actualización</th>
+                        <th>Creado</th>
+                        <th>Actualizado</th>
                         <th>Autor</th>
                         <th>Opciones</th>
                     </thead>
@@ -27,32 +27,7 @@
         </div>
     </div>
 </div>
-<div class="row">
-<div class="col-md-6">
-          <div class="card">
-              <div class="card-header">Agregar</div>
-              <div class="card-body">
-                  <form action="<?= route_to('add.release'); ?>" method="post" id="add-release-form" autocomplete="off">
-                  <?= csrf_field(); ?>
-                      <div class="form-group">
-                         <label for="">Asunto</label>
-                         <input type="text" class="form-control" name="release_subject" placeholder="Enter release subject">
-                         <span class="text-danger error-text release_subject_error"></span>
-                      </div>
-                      <div class="form-group">
-                         <label for="">Contenido</label>
-                         <input type="text" class="form-control" name="release_description" placeholder="Enter description release">
-                         <span class="text-danger error-text release_description_error"></span>
-                      </div>
-                      <div class="form-group">
-                         <button type="submit" class="btn btn-block btn-success">Guardar</button>
-                      </div>
-                  </form>
-              </div>
-          </div>
-     </div>
-</div>
-
+<?= $this->include('adm/module_release/addReleaseModal'); ?>
 <?= $this->include('adm/module_release/editReleaseModal'); ?>
 <?= $this->endSection(); ?>
 <?= $this->section('scripts'); ?>
@@ -60,7 +35,14 @@
     var csrfName = $('meta.csrf').attr('name'); //CSRF TOKEN NAME
     var csrfHash = $('meta.csrf').attr('content'); //CSRF HASH
 
-    //ADD NEW COUNTRY
+    //OPEN MODAL ADD NEW
+    $(document).on('click', '#addNewReleaseBtn', function() {
+        
+        $('.addRelease').modal('show');
+    });
+      
+    
+    //ADD NEW ajax
     $('#add-release-form').submit(function(e) {
         e.preventDefault();
         var form = this;
@@ -77,8 +59,9 @@
             success: function(data) {
                 if ($.isEmptyObject(data.error)) {
                     if (data.code == 1) {
-                        $(form)[0].reset();
+                        //$(form)[0].reset();
                         $('#releases-table').DataTable().ajax.reload(null, false);
+                        $('.addRelease').modal('hide');
                     } else {
                         alert(data.msg);
                     }
@@ -126,13 +109,11 @@
     //FUNCION PARA ABRIREL MODAL Y PASARLE LOS DATOS
     $(document).on('click', '#updateReleaseBtn', function() {
         var release_id = $(this).data('id');
-        //alert(csrfHash);
 
         $.post("<?= route_to('get.release.info') ?>", {
             release_id: release_id,
             [csrfName]: csrfHash
         }, function(data) {
-            //alert(data.results);
 
             $('.editRelease').find('form').find('input[name="rid"]').val(data.results.ReleaseID);
             $('.editRelease').find('form').find('input[name="release_subject"]').val(data.results.Release_subject);
