@@ -43,7 +43,7 @@ $routes->group('/', function($routes){
     $routes->get('notices', 'Notices::index');
     $routes->get('contact', 'Contact::index');
 });
-
+$routes->get('getReleaseLast','Release::getReleaseLast',['as'=>'get.release.last']);
 //RUTAS PARA EL ADMIN DE CONTENIDOS
 /*Autenticacion */
 $routes->group('admin', function($routes){

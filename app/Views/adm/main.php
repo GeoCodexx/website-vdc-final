@@ -4,7 +4,7 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +23,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?= base_url('plugins/datatables-bs5/css/dataTables.bootstrap5.min.css'); ?>">  
   <!--  extension responsive  -->
   <link rel="stylesheet" href="<?= base_url('plugins/datatables-bs5/css/responsive.bootstrap5.min.css'); ?>">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+  
+  <link rel="stylesheet" href="<?= base_url('plugins/rich-text/css/richtext.min.css'); ?>">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -308,7 +312,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="<?= base_url('dist/js/adminlte.min.js'); ?>"></script>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="<?= base_url('plugins/datepicker/bootstrap-datepicker.es.min.js'); ?>"></script>
+
 <script src="<?= base_url('plugins/sweetalert2/sweetalert2.all.min.js'); ?>"></script>
+
+<script src="<?= base_url('plugins/rich-text/js/jquery.richtext.min.js'); ?>"></script>
+
 
 <?= $this->renderSection('scripts'); ?>
 </body>

@@ -14,7 +14,7 @@ class Release extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['UserID', 'Release_subject', 'Release_description'];
+    protected $allowedFields    = ['UserID', 'Release_subject', 'Release_description', 'Release_published_from', 'Release_published_to'];
 
     // Dates
     protected $useTimestamps = true;

@@ -168,6 +168,7 @@
 
     <!-- Template Javascript -->
     <script src="<?= base_url('js/main.js')?>"></script>
+    <?= $this->renderSection('scripts'); ?>
 </body>
 
 </html>

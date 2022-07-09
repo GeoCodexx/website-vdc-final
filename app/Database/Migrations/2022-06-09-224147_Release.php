@@ -27,8 +27,15 @@ class Release extends Migration
                 'null' => false,
             ],
             'Release_description' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '1024',
+                'type'       => 'TEXT',
+                'null' => false
+            ],
+            'Release_published_from' => [
+                'type'       => 'DATETIME',
+                'null' => false
+            ],
+            'Release_published_to' => [
+                'type'       => 'DATETIME',
                 'null' => false
             ],
             'created_at' => [

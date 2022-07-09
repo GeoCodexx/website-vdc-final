@@ -6,20 +6,19 @@
         <div class="card">
             <div class="card-header">Lista de Comunicados</div>
             <div class="card-body">
-        <br />
-        <button class="btn btn-success" id="addNewReleaseBtn"><i class="fas fa-plus"></i> Nuevo</button>
-        <!--<button class="btn btn-default" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload</button>-->
-        <br />
-        <br />  
+                <br />
+                <button class="btn btn-success" id="addNewReleaseBtn"><i class="fas fa-plus"></i> Nuevo</button>
+                <!--<button class="btn btn-default" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload</button>-->
+                <br />
+                <br />
                 <table class="table table-hover display nowrap w-100" id="releases-table">
                     <thead>
                         <th>#</th>
-                        <th>Asunto</th> 
-                        <th>Contenido</th>
-                        <th>Creado</th>
-                        <th>Actualizado</th>
-                        <th>Autor</th>
-                        <th>Opciones</th>
+                        <th>ASUNTO</th>
+                        <th>FECHA PUBLICACIÓN</th>
+                        <th>FECHA CADUCIDAD</th>
+                        <th>AUTOR</th>
+                        <th>OPCIONES</th>
                     </thead>
                     <tbody></tbody>
                 </table>
@@ -29,6 +28,7 @@
 </div>
 <?= $this->include('adm/module_release/addReleaseModal'); ?>
 <?= $this->include('adm/module_release/editReleaseModal'); ?>
+<?= $this->include('adm/module_release/previewReleaseModal'); ?>
 <?= $this->endSection(); ?>
 <?= $this->section('scripts'); ?>
 <script>
@@ -37,11 +37,115 @@
 
     //OPEN MODAL ADD NEW
     $(document).on('click', '#addNewReleaseBtn', function() {
-        
         $('.addRelease').modal('show');
     });
-      
-    
+
+    $('#editorAdd').richText({
+        height: 200,
+        translations: {
+            'title': 'Título',
+            'white': 'Blanco',
+            'black': 'Negro',
+            'brown': 'Brown',
+            'beige': 'Beige',
+            'darkBlue': 'Azul Oscuro',
+            'blue': 'Azul',
+            'lightBlue': 'Azul Claro',
+            'darkRed': 'Rojo Oscuro',
+            'red': 'Rojo',
+            'darkGreen': 'Verde Oscuro',
+            'green': 'Verde',
+            'purple': 'Morado',
+            'darkTurquois': 'Turquesa Oscuro',
+            'turquois': 'Turquesa',
+            'darkOrange': 'Naranja Oscuro',
+            'orange': 'Naranja',
+            'yellow': 'Amarillo',
+            'imageURL': 'Imagen URL',
+            'fileURL': 'Archivo URL',
+            'linkText': 'Texto del Link',
+            'url': 'URL',
+            'size': 'Tamaño',
+            'responsive': 'Responsivo',
+            'text': 'Texto',
+            'openIn': 'Open in',
+            'sameTab': 'Same tab',
+            'newTab': 'New tab',
+            'align': 'Alinear',
+            'left': 'Izquierda',
+            'center': 'Centro',
+            'right': 'Derecha',
+            'rows': 'Filas',
+            'columns': 'Columnas',
+            'add': 'Agregar',
+            'pleaseEnterURL': 'Ingresa una URL',
+            'videoURLnotSupported': 'Video URL no soportado',
+            'pleaseSelectImage': 'Seleccione una imagen',
+            'pleaseSelectFile': 'Seleccione un archivo',
+            'bold': 'Negrita',
+            'italic': 'Italica',
+            'underline': 'Subrayado',
+            'alignLeft': 'Alinear a la izquierda',
+            'alignCenter': 'Alinear al centro',
+            'alignRight': 'Alinear a la derecha',
+            'addOrderedList': 'Agregar lista ordenada',
+            'addUnorderedList': 'Agregar lista desordenada',
+            'addHeading': 'Agregar Encabezado/Título',
+            'addFont': 'Agregar tipo de letra',
+            'addFontColor': 'Agregar color de letra',
+            'addFontSize': 'Agregar tamaño de letra',
+            'addImage': 'Agregar imagen',
+            'addVideo': 'Agregar video',
+            'addFile': 'Agregar archivo',
+            'addURL': 'Agregar URL',
+            'addTable': 'Agregar tabla',
+            'removeStyles': 'Quitar estilos',
+            'code': 'Mostrar código HTML',
+            'undo': 'Deshacer',
+            'redo': 'Rehacer',
+            'close': 'Cerrar'
+        }
+    });
+
+    $('#editorUpd').richText({
+        //height: 200,
+        adaptiveHeight: true
+    });
+
+
+    $(document).on('click', '#clsModal', function() {
+        //EDITOR TEXT
+        $('#release-subj').val('');
+        $('#editorAdd').val('').trigger('change');
+        $('#addFrom').datepicker('update', '');
+        $('#addTo').datepicker('update', '');
+
+    });
+
+
+    //DATE PICKER 
+    $('#addFrom').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: 'true',
+        language: 'es'
+    });
+    $('#addTo').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: 'true',
+        language: 'es'
+    });
+
+    $('#updFrom').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: 'true',
+        language: 'es'
+    });
+    $('#updTo').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: 'true',
+        language: 'es'
+    });
+
     //ADD NEW ajax
     $('#add-release-form').submit(function(e) {
         e.preventDefault();
@@ -59,9 +163,18 @@
             success: function(data) {
                 if ($.isEmptyObject(data.error)) {
                     if (data.code == 1) {
-                        //$(form)[0].reset();
+                        $(form)[0].reset();
+                        $('#editor').unRichText();
+                        $('.published').datepicker('update', '');
                         $('#releases-table').DataTable().ajax.reload(null, false);
                         $('.addRelease').modal('hide');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Se ha guardado con éxito!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     } else {
                         alert(data.msg);
                     }
@@ -69,6 +182,11 @@
                     $.each(data.error, function(prefix, val) {
                         $(form).find('span.' + prefix + '_error').text(val);
                     });
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Error!',
+                        text: 'Por favor rellena todos los campos del formulario.'
+                    })
                 }
             }
         });
@@ -106,20 +224,50 @@
         }
     });
 
-    //FUNCION PARA ABRIREL MODAL Y PASARLE LOS DATOS
-    $(document).on('click', '#updateReleaseBtn', function() {
-        var release_id = $(this).data('id');
+    //PREVIEW RELEASE
+    $(document).on('click', '#previewReleaseBtn', function() {
+        var release_id = $(this).data('id'); //obtiene del atributo del html button "data-id"
 
         $.post("<?= route_to('get.release.info') ?>", {
             release_id: release_id,
             [csrfName]: csrfHash
         }, function(data) {
+            /*
+            let date_from = data.results.Release_published_from.substr(0, 10).split(/\-/);
+            let f_df = [date_from[2], date_from[1], date_from[0]].join('-');
+            let date_to = data.results.Release_published_to.substr(0, 10).split(/\-/);
+            let t_dt = [date_to[2], date_to[1], date_to[0]].join('-')*/
+            $("#contentRelease").html(data.results.Release_description);
+            if ($(".table-1").length) {
+                // hacer algo aquí si el elemento existe
+                $(".table-1").addClass("table");
+            }
+            $('.previewRelease').modal('show');
+
+        }, 'json');
+    });
+
+    //FUNCION PARA ABRIREL MODAL Y PASARLE LOS DATOS
+    $(document).on('click', '#updateReleaseBtn', function() {
+        var release_id = $(this).data('id'); //obtiene del atributo del html button "data-id"
+
+        $.post("<?= route_to('get.release.info') ?>", {
+            release_id: release_id,
+            [csrfName]: csrfHash
+        }, function(data) {
+            let date_from = data.results.Release_published_from.substr(0, 10).split(/\-/);
+            let f_df = [date_from[2], date_from[1], date_from[0]].join('-');
+            let date_to = data.results.Release_published_to.substr(0, 10).split(/\-/);
+            let t_dt = [date_to[2], date_to[1], date_to[0]].join('-')
 
             $('.editRelease').find('form').find('input[name="rid"]').val(data.results.ReleaseID);
             $('.editRelease').find('form').find('input[name="release_subject"]').val(data.results.Release_subject);
-            $('.editRelease').find('form').find('input[name="release_description"]').val(data.results.Release_description);
+            $('#updFrom').datepicker('update', f_df);
+            $('#updTo').datepicker('update', t_dt);
+            $('#editorUpd').val(data.results.Release_description).trigger('change');
             $('.editRelease').find('form').find('span.error-text').text('');
             $('.editRelease').modal('show');
+
         }, 'json');
     });
 
@@ -153,6 +301,12 @@
                     $.each(data.error, function(prefix, val) {
                         $(form).find('span.' + prefix + '_error').text(val);
                     });
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor rellena todo los campos del formulario'
+                    })
                 }
             }
         });
@@ -192,6 +346,10 @@
             }
         });
     });
+
+    //EditorText
+    //tinymce.init({selector:'#editor', language: 'es_MX', height : "340"});
+    //let myContent = tinymce.get("#editor").getContent();
 </script>
 
 <?= $this->endSection(); ?>
