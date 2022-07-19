@@ -23,17 +23,16 @@ class Event extends Migration
             ],
             'Event_title' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => '200',
                 'null' => false,
             ],
             'Event_description' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '1024',
+                'type'       => 'TEXT',
                 'null' => false
             ],
             'Event_image' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '250',
+                'constraint' => '2000',
                 'null' => false
             ],
             'created_at' => [

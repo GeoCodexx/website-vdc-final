@@ -124,15 +124,20 @@
         $.get("<?= route_to('get.release.last') ?>",
         function(data) {
            //console.log(data.results[0].Release_description);
-            
-           $("#contentRelease").html(data.results[0].Release_description);
-            //console.log(data.results.Release_description);
-            if ($(".table-1").length) {
-                // hacer algo aquí si el elemento existe
-                $(".table-1").addClass("table");
+            let fa= new Date();//2022-07-09
+            let fp= new Date(data.results[0].Release_published_to);
+           if (data.results.length>0) {
+                
+                if (fa <= fp) {
+                    $("#contentRelease").html(data.results[0].Release_description);
+                    //console.log(data.results.Release_description);
+                    if ($(".table-1").length) {
+                    // hacer algo aquí si el elemento existe
+                        $(".table-1").addClass("table");
+                    }
+                    $('.previewRelease').modal('show');
+                }
             }
-            $('.previewRelease').modal('show');
-
         }, 'json');
     });
     
