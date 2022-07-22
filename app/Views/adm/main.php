@@ -178,7 +178,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= site_url('admin/events'); ?>" class="nav-link <?= (current_url() == base_url('admin/events')) ? 'active' : ''; ?>">
+              <a href="<?= site_url('admin/eventos'); ?>" class="nav-link <?= (current_url() == base_url('admin/eventos')) ? 'active' : ''; ?>">
                 <i class="nav-icon fas fa-calendar-alt"></i>
                 <p>
                   Eventos

@@ -44,6 +44,14 @@ $routes->group('/', function($routes){
     $routes->get('contact', 'Contact::index');
 });
 $routes->get('getReleaseLast','Release::getReleaseLast',['as'=>'get.release.last']);
+
+$routes->get('getEventLast','Events::getEventLast',['as'=>'get.event.last']);
+$routes->get('fetchEvents','Events::fetchEvents', ['as'=>'fetch.events']);
+$routes->get('getEvnt/(:num)','Events::getEvnt/$1', ['as'=>'get_evnt']);
+
+$routes->get('getNoticeLast','Notices::getNoticeLast',['as'=>'get.notice.last']);
+$routes->get('fetchNotices','Notices::fetchNotices', ['as'=>'fetch.notices']);
+$routes->get('getNotice/(:num)','Notices::getNotice/$1', ['as'=>'get_notice']);
 //RUTAS PARA EL ADMIN DE CONTENIDOS
 /*Autenticacion */
 $routes->group('admin', function($routes){
@@ -65,8 +73,24 @@ $routes->group('admin', ['filter'=>'AuthCheck'], function ($routes) {
             $routes->post('deleteRelease','Release::deleteRelease',['as'=>'delete.release']);
         });
         //Eventos
+        $routes->group('eventos', function ($routes) {
+            $routes->get('','Events::eventos',['as'=>'eventos']);
+	        $routes->post('add','Events::addEvent',['as'=>'add.event']);
+            $routes->get('getAllEvents','Events::getAllEvents',['as'=>'get.all.events']);
+            $routes->post('getEventInfo','Events::getEventInfo',['as'=>'get.event.info']);
+            $routes->post('updateEvent','Events::updateEvent',['as'=>'update.event']);
+            $routes->post('deleteEvent','Events::deleteEvent',['as'=>'delete.event']);
+        });
     
         //Noticias
+        $routes->group('notices', function ($routes) {
+            $routes->get('','Notices::notices',['as'=>'notices']);
+	        $routes->post('add','Notices::addNotice',['as'=>'add.notice']);
+            $routes->get('getAllNotices','Notices::getAllNotices',['as'=>'get.all.notices']);
+            $routes->post('getNoticeInfo','Notices::getNoticeInfo',['as'=>'get.notice.info']);
+            $routes->post('updateNotice','Notices::updateNotice',['as'=>'update.notice']);
+            $routes->post('deleteNotice','Notices::deleteNotice',['as'=>'delete.notice']);
+        });
         //Usuarios
         /*
         $routes->group('users', function ($routes) {

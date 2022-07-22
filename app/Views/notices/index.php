@@ -2,8 +2,8 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
     <!-- Header Start -->
-    <div class="container-fluid bg-primary py-5 mb-5 page-header">
-        <div class="container py-5">
+    <div class="container-fluid bg-primary py-3 mb-3 page-header">
+        <div class="container py-2">
             <div class="row justify-content-center">
                 <div class="col-lg-10 text-center">
                     <h1 class="display-3 text-white animated slideInDown">Noticias</h1>
@@ -19,8 +19,8 @@
     </div>
     <!-- Header End -->
 
-    <div class="container-xxl py-3 wow fadeInUp" data-wow-delay="1s">
-    <div class="container p-5">
+    <div class="container-xxl py-2 wow fadeInUp" data-wow-delay="1s">
+    <div class="container p-3">
         <div class="row">
                 <div class="col-12">
                 <div class="card mb-4 border-0 shadow">

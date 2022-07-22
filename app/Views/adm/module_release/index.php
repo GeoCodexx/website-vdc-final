@@ -293,6 +293,13 @@
                     if (data.code == 1) {
                         $('#releases-table').DataTable().ajax.reload(null, false);
                         $('.editRelease').modal('hide');
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Se guardaron los cambios.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     } else {
                         alert(data.msg);
                     }
