@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>eLEARNING - eLearning HTML Template</title>
+    <title>I.E.I. N° 30011 Virgen del Carmen</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -165,7 +165,7 @@
     <script src="<?= base_url('lib/easing/easing.min.js')?>"></script>
     <script src="<?= base_url('lib/waypoints/waypoints.min.js')?>"></script>
     <script src="<?= base_url('lib/owlcarousel/owl.carousel.min.js')?>"></script>
-
+    <script src="<?= base_url('plugins/sweetalert2/sweetalert2.all.min.js'); ?>"></script>
     <!-- Template Javascript -->
     <script src="<?= base_url('js/main.js')?>"></script>
     <?= $this->renderSection('scripts'); ?>

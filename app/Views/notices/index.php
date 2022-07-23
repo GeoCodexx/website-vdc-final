@@ -1,114 +1,122 @@
-
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
-    <!-- Header Start -->
-    <div class="container-fluid bg-primary py-3 mb-3 page-header">
-        <div class="container py-2">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center">
-                    <h1 class="display-3 text-white animated slideInDown">Noticias</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-center">
-                            <li class="breadcrumb-item"><a class="text-white" href="#">Inicio</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">Noticias</li>
-                        </ol>
-                    </nav>
-                </div>
+<!-- Header Start -->
+<div class="container-fluid bg-primary py-3 mb-3 page-header">
+    <div class="container py-3">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h2 class="display-3 text-white animated slideInDown">Noticias</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Inicio</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Noticias</li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
-    <!-- Header End -->
+</div>
+<!-- Header End -->
 
-    <div class="container-xxl py-2 wow fadeInUp" data-wow-delay="1s">
+<div class="container-xxl py-3">
     <div class="container p-3">
-        <div class="row">
-                <div class="col-12">
-                <div class="card mb-4 border-0 shadow">
-                    <div class="row g-0">
-                        <div class="col-md-6">
-                        <img src="img/cat-2.jpg" class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-6">
-                        <div class="card-body">
-                            <h5 class="card-title">TITULO</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                            </p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
+        <div class="row wow fadeInUp" data-wow-delay="0.8s">
+            <div class="col-12">
+                <div class="card mb-4 border-0 shadow" id="last_notice">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
                         </div>
                     </div>
-                    </div>
-                </div>  
+                </div>
+            </div>
         </div>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 wow fadeInDown" data-wow-delay="0.8s">
-            
-            <div class="col">
-                <a href="#">
-                    <div class="card h-100 shadow card-border">
-                        <img src="img/course-1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 wow fadeInDown" id="show_notices" data-wow-delay="1.2s">
 
-            <div class="col">
-                <a href="#">
-                    <div class="card h-100 shadow card-border">
-                        <img src="img/course-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col">
-                <a href="#">
-                    <div class="card h-100 shadow card-border">
-                        <img src="img/course-3.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            
         </div>
 
         <div class="row mt-4">
-            
+
             <nav aria-label="...">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
-                    <span class="page-link"><</span>
+                        <span class="page-link">Previous</span>
                     </li>
                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                     <li class="page-item active" aria-current="page">
-                    <span class="page-link">2</span>
+                        <span class="page-link">2</span>
                     </li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item">
-                    <a class="page-link" href="#">></a>
+                        <a class="page-link" href="#">Next</a>
                     </li>
                 </ul>
             </nav>
         </div>
 
-    </div>    
-    
+    </div>
+
 </div>
-    
+
 <?= $this->endSection() ?>
+<?= $this->section('scripts'); ?>
+<script>
+    //PREVIEW RELEASE
+    $(document).ready(function() {
+
+        $.get("<?= route_to('get.notice.last') ?>",
+        function(data) {
+            //console.log(data.message.created_at);
+
+            let date_from = data.message.created_at.substr(0, 10).split(/\-/);
+                let p_date = [date_from[2], date_from[1], date_from[0]].join('-');
+
+                $('#last_notice').html(
+                    '<div class="row g-0"><div class="col-md-6">'+
+                    '<img src="<?= base_url('uploads') ?>/' + data.message.Notice_image + '" class="img-fluid rounded-start" alt="...">' +
+                    '</div><div class="col-md-6"><div class="card-body">' +
+                    '<h5 class="card-title">' + data.message.Notice_title + '</h5>' +
+                    '<p class="card-text" id="detail_notice_description">' + data.message.Notice_description + '</p>' +
+                    '<p class="card-text fst-italic text-end" id="detail_notice_created">Publicado: ' + p_date + '</p></div></div></div>'
+                ).fadeIn();
+                
+        });
+        
+        $.ajax({
+            url: '<?= route_to('fetch.notices') ?>',
+            method: 'get',
+            success: function(response) {
+                $("#show_notices").html(response.message);
+            }
+        });
+    });
+
+    // notice detail ajax request
+    $(document).delegate('.notice_link', 'click', function(e) {
+        e.preventDefault();
+        const id = $(this).attr('id');        
+        $.ajax({
+            url: '<?= base_url('getNotice') ?>/' + id,
+            method: 'get',
+            dataType: 'json',
+            success: function(response) {
+                let date_from = response.message.created_at.substr(0, 10).split(/\-/);
+                let p_date = [date_from[2], date_from[1], date_from[0]].join('-');
+
+                $('html, body').animate({scrollTop: 195}, 10);
+                $('#last_notice').hide().html(
+                    '<div class="row g-0"><div class="col-md-6">'+
+                    '<img src="<?= base_url('uploads') ?>/' + response.message.Notice_image + '" class="img-fluid rounded-start" alt="...">' +
+                    '</div><div class="col-md-6"><div class="card-body">' +
+                    '<h5 class="card-title">' + response.message.Notice_title + '</h5>' +
+                    '<p class="card-text" id="detail_notice_description">' + response.message.Notice_description + '</p>' +
+                    '<p class="card-text fst-italic text-end" id="detail_notice_created">Publicado: ' + p_date + '</p></div></div></div>'
+                ).fadeIn(1500);
+            }
+
+        });
+    });
+</script>
+
+<?= $this->endSection(); ?>

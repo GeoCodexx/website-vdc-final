@@ -48,31 +48,35 @@
                         tabindex="0"></iframe>
                 </div>
                 <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
-                    <form>
+                    <form action="<?= route_to('add.message'); ?>" method="post" id="add-message-form" autocomplete="off">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Tu Nombre">
+                                    <input type="text" class="form-control" name="message_names" id="name" placeholder="Tu Nombre">
                                     <label for="name">Nombres</label>
                                 </div>
+                                <span class="text-danger error-text message_names_error"></span>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Tu Email">
+                                    <input type="email" class="form-control" name="message_email" id="email" placeholder="Tu Email">
                                     <label for="email">Email</label>
                                 </div>
+                                <span class="text-danger error-text message_email_error"></span>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" placeholder="Asunto">
+                                    <input type="text" class="form-control" name="message_subject" id="subject" placeholder="Asunto">
                                     <label for="subject">Asunto</label>
                                 </div>
+                                <span class="text-danger error-text message_subject_error"></span>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Escribe tu mensaje" id="message" style="height: 150px"></textarea>
+                                    <textarea class="form-control" name="message_body" placeholder="Escribe tu mensaje" id="message" style="height: 150px"></textarea>
                                     <label for="message">Mensaje</label>
                                 </div>
+                                <span class="text-danger error-text message_body_error"></span>
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-primary w-100 py-3" type="submit">ENVIAR</button>
@@ -84,4 +88,50 @@
         </div>
     </div>
     <!-- Contact End -->
+    <?= $this->endSection() ?>
+    <?= $this->section('scripts') ?>
+    <script>
+            //ADD NEW ajax
+    $('#add-message-form').submit(function(e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: $(form).attr('action'),
+            method: $(form).attr('method'),
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            beforeSend: function() {
+                $(form).find('span.error-text').text('');
+            },
+            success: function(data) {
+                if ($.isEmptyObject(data.error)) {
+                    if (data.code == 1) {
+                        $(form)[0].reset();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Su mensaje fue enviado correctamente.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        alert(data.msg);
+                    }
+                } else {
+                    $.each(data.error, function(prefix, val) {
+                        $(form).find('span.' + prefix + '_error').text(val);
+                    });
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Error!',
+                        text: 'Por favor rellena todos los campos del formulario.'
+                    })
+                }
+            }
+        });
+    });
+
+    </script>
     <?= $this->endSection() ?>

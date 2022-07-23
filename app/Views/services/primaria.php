@@ -19,18 +19,18 @@
     </div>
     <!-- Header End -->
     <!-- About Start -->
-    <div class="container-xxl py-3">
+    <div class="container-md py-3">
         <div class="container">
-            <div class="row g-5">
+            <div class="row g-5 shadow">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 300px;">
                     <div class="position-relative h-100">
                         <img class="img-fluid position-absolute w-100 h-100" src="<?= base_url('img/about.jpg'); ?>" alt="" style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <h6 class="section-title bg-white text-start text-primary pe-3">Educación Básica Regular</h6>
-                    <h1 class="mb-4">Nivel Primaria</h1>
-                    <p class="mb-4">La Educación Primaria constituye el segundo nivel de la Educación Básica Regular y se desarrolla
+                   <!-- <h6 class="section-title bg-white text-start text-primary pe-3">Educación Básica Regular</h6>-->
+                    <h1 class="mb-4 text-center text-primary">Nivel Primaria</h1>
+                    <p class="mb-4 text-just">La Educación Primaria constituye el segundo nivel de la Educación Básica Regular y se desarrolla
 durante seis grados. Tiene por objetivo el desarrollo de competencias de los estudiantes el cual es
 promovido desde la Educación Inicial. La atención de los estudiantes en el nivel considera los ritmos,
 estilos y niveles de aprendizaje, así como, la pluralidad lingüística y cultural. En este nivel se
@@ -71,17 +71,17 @@ asegurar el desarrollo óptimo de los estudiantes, así como, enriquecer el proc
     </div>
     <!-- About End -->
     <!-- Courses Start -->
-    <div class="container-xxl py-5">
+    <div class="container-md py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="section-title bg-white text-center text-primary px-3">Competencias Transversales</h6>
                 <h1 class="mb-5">Nosotros fomentamos...</h1>
             </div>
-            <div class="row g-4 justify-content-center">
+            <div class="row g-4 justify-content-center shadow">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="<?= base_url('img/course-1.jpg'); ?>" alt="">
+                            <img class="img-fluid" src="<?= base_url('img/arte-services.jpg'); ?>" alt="">
                     
                         </div>
                         <div class="text-center p-4 pb-1">
@@ -102,7 +102,7 @@ asegurar el desarrollo óptimo de los estudiantes, así como, enriquecer el proc
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="<?= base_url('img/course-2.jpg'); ?>" alt="">
+                            <img class="img-fluid" src="<?= base_url('img/deporte-services.jpg'); ?>" alt="">
                         
                         </div>
                         <div class="text-center p-4 pb-1">
@@ -124,7 +124,7 @@ asegurar el desarrollo óptimo de los estudiantes, así como, enriquecer el proc
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="<?= base_url('img/course-3.jpg'); ?>" alt="">
+                            <img class="img-fluid" src="<?= base_url('img/tecno-services..jpg'); ?>" alt="">
                        
                         </div>
                         <div class="text-center p-4 pb-1">

@@ -15,7 +15,7 @@ class Notices extends BaseController
         return View('notices/index');
     }
 
-    public function notices()
+    public function noticias()
     {
         //$data['pageTitle'] = 'Releases List';
         $userModel = model('UserModel');
@@ -25,7 +25,7 @@ class Notices extends BaseController
             'title' => 'Noticias',
             'userInfo' => $userInfo
         ];
-        return view('adm/module_notices/index', $data);
+        return view('adm/module_notice/index', $data);
     }
 
     public function addNotice()
@@ -34,10 +34,9 @@ class Notices extends BaseController
         $validation = service('validation');
         $this->validate([
             'notice_title' => [
-                'rules' => 'required|is_unique[notice.Notice_title]',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Ingrese el título de la Noticia!!',
-                    'is_unique' => 'El titulo de la noticia ya existe',
+                    'required' => 'Ingrese el título de la Noticia!!'
                 ]
             ],
             'notice_description' => [
@@ -185,16 +184,15 @@ class Notices extends BaseController
 
     public function updateNotice()
     {
-        $noticeModel = model('NoticeModel');
+        $eventModel = model('NoticeModel');
         $validation = \Config\Services::validation();
-        $eid = $this->request->getPost('eid');
+        $nid = $this->request->getPost('nid');
 
         $this->validate([
             'notice_title' => [
-                'rules' => 'required|is_unique[notice.Notice_title,NoticeID,' . $eid . ']',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Título del noticeo es requerido',
-                    'is_unique' => 'El Titulo ya existe'
+                    'required' => 'Título del evento es requerido'
                 ]
             ],
             'notice_description' => [
@@ -223,7 +221,7 @@ class Notices extends BaseController
                     'Notice_description' => $this->request->getPost('notice_description'),
                     'Notice_image' => $name
                 ];
-                $query = $noticeModel->update($eid, $data);
+                $query = $eventModel->update($nid, $data);
 
                 if ($query) {
                     echo json_encode(['code' => 1, 'msg' => 'Notice info have been updated successfully']);
@@ -235,7 +233,7 @@ class Notices extends BaseController
                     'Notice_title' => $this->request->getPost('notice_title'),
                     'Notice_description' => $this->request->getPost('notice_description')
                 ];
-                $query = $noticeModel->update($eid, $data);
+                $query = $eventModel->update($nid, $data);
     
                 if ($query) {
                     echo json_encode(['code' => 1, 'msg' => 'Notice info have been updated successfully']);
@@ -245,7 +243,6 @@ class Notices extends BaseController
             }
         }
     }
-
 
     public function deleteNotice()
     {
@@ -263,22 +260,22 @@ class Notices extends BaseController
     //FETCH EVENTS STATIC VIEW ROUTE '/noticeos'
     public function fetchNotices() {
         $noticeModel = model('NoticeModel');
-        $evnts = $noticeModel->findAll();
+        $notices = $noticeModel->findAll();
         $data = '';
 
-        if ($evnts) {
-            foreach ($evnts as $evnt) {
+        if ($notices) {
+            foreach ($notices as $notice) {
                 $data .= '<div class="col">
-                <a href="#" id="' . $evnt['NoticeID'] . '" class="evnt_link">
+                <a href="#" id="' . $notice['NoticeID'] . '" class="notice_link">
                     <div class="card h-100 card-border shadow">
                         
-                            <img src="uploads/' . $evnt['Notice_image'] . '" class="img-fluid card-img-top">
+                            <img src="uploads/' . $notice['Notice_image'] . '" class="img-fluid card-img-top">
                         
                         <div class="card-body">
-                            <h6 class="card-title">' . $evnt['Notice_title'] . '</h6>
+                            <h6 class="card-title">' . $notice['Notice_title'] . '</h6>
                         </div>
                         <div class="card-footer text-muted text-center">
-                            <small class="text-muted">Publicado: ' . date('d-m-Y', strtotime($evnt['created_at'])) . '</small>
+                            <small class="text-muted">Publicado: ' . date('d-m-Y', strtotime($notice['created_at'])) . '</small>
                         </div>
                     </div>
                 </a>
@@ -299,12 +296,12 @@ class Notices extends BaseController
     // handle fetch post detail ajax request
     public function getNotice($id = null) {
         $noticeModel = model('NoticeModel');
-        $evnt = $noticeModel->find($id);
-        //return var_dump($evnt);
+        $notice = $noticeModel->find($id);
+        //return var_dump($notice);
         
         return $this->response->setJSON([
             'error' => false,
-            'message' => $evnt
+            'message' => $notice
         ]);
     }
 

@@ -259,8 +259,8 @@ class Release extends BaseController
         $db = db_connect();
         //$db->query("<YOUR QUERY HERE>");
             $info= $db->query("Select * from `release`
-            WHERE Release_published_from  = (
-                SELECT MAX(Release_published_from)
+            WHERE created_at  = (
+                SELECT MAX(created_at)
                 FROM dbescuela.`release`
             )")->getResult();
 

@@ -2,61 +2,95 @@
 <?= $this->section('content') ?>
 
 <div class="row">
-  <div class="col-lg-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
+  <div class="row">
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-info">
+      <div class="inner">
+        <h3 id="cant_rel"></h3>
 
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the bulk of the card's
-          content.
-        </p>
-
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
+        <p>Comunicados</p>
       </div>
-    </div>
-
-    <div class="card card-primary card-outline">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the bulk of the card's
-          content.
-        </p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
+      <div class="icon">
+        <i class="ion ion-speakerphone"></i>
       </div>
-    </div><!-- /.card -->
-  </div>
-  <!-- /.col-md-6 -->
-  <div class="col-lg-6">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="m-0">Featured</h5>
-      </div>
-      <div class="card-body">
-        <h6 class="card-title">Special title treatment</h6>
-
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-
-    <div class="card card-primary card-outline">
-      <div class="card-header">
-        <h5 class="m-0">Featured</h5>
-      </div>
-      <div class="card-body">
-        <h6 class="card-title">Special title treatment</h6>
-
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
+      <a href="<?= site_url('admin/releases')?>" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
-  <!-- /.col-md-6 -->
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-success">
+      <div class="inner">
+        <h3 id="cant_evnt"></h3>
+
+        <p>Eventos</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-calendar"></i>
+      </div>
+      <a href="<?= site_url('admin/eventos')?>" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-warning">
+      <div class="inner">
+        <h3 id="cant_noti"></h3>
+
+        <p>Noticias</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-document-text"></i>
+      </div>
+      <a href="<?= site_url('admin/noticias')?>" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-danger">
+      <div class="inner">
+        <h3 id="cant_msg"></h3>
+
+        <p>Mensajes</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-email"></i>
+      </div>
+      <a href="<?= site_url('admin/messages')?>" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <div class="col-12 d-flex justify-content-center">
+      <img  class="img-fluid" src="<?= base_url('img/insignia-solo.png') ?>" alt="">
+  </div>
+  <!-- ./col -->
+  </div><!--
+  <div class="row pt-4">
+    <div class="col-12 d-flex justify-content-center">
+      <img  class="img-fluid" src="<?= base_url('img/insignia-solo.png') ?>" alt="">
+    </div>
+  </div>-->
+
 </div>
 <!-- /.row -->
+<?= $this->endSection() ?>
+<?= $this->section('scripts') ?>
+<script>
+  $(document).ready(function(){
+
+    $.get('<?= route_to('get_count_release') ?>', function(data){
+      if(data!=null){
+        //console.log(data.message.rel);
+        $('#cant_rel').text(data.message.rel);
+        $('#cant_evnt').text(data.message.evnt);
+        $('#cant_noti').text(data.message.noti);
+        $('#cant_msg').text(data.message.msg);
+      }
+    })
+
+  });
+</script>
+
 <?= $this->endSection() ?>

@@ -36,10 +36,9 @@ class Events extends BaseController
         $validation = service('validation');
         $this->validate([
             'event_title' => [
-                'rules' => 'required|is_unique[release.Release_subject]',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Ingrese el título del Evento!!',
-                    'is_unique' => 'El titulo del vento ya existe',
+                    'required' => 'Ingrese el Asunto del Evento!!'
                 ]
             ],
             'event_description' => [
@@ -193,10 +192,9 @@ class Events extends BaseController
 
         $this->validate([
             'event_title' => [
-                'rules' => 'required|is_unique[event.Event_title,EventID,' . $eid . ']',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Título del evento es requerido',
-                    'is_unique' => 'El Titulo ya existe'
+                    'required' => 'Título del evento es requerido'
                 ]
             ],
             'event_description' => [

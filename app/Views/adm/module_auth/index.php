@@ -29,7 +29,7 @@
       <?= csrf_field(); ?>
 
       <?php if (!empty(session()->getFlashdata('fail'))) : ?>
-        <div class="alert alert-danger" style="opacity: 0.8;">
+        <div class="alert alert-danger">
         <span class="fas fa-exclamation-triangle"> </span>
           <?= session()->getFlashdata('fail'); ?>
         </div>    
@@ -57,7 +57,7 @@
           
           <!-- /.col -->
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Ingresa al sistema</button>
+            <button type="submit" class="btn btn-info btn-block">Ingresar al sistema</button>
           </div>
           <!-- /.col -->
         </div>

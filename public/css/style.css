@@ -442,3 +442,8 @@
 .card-border:hover{
     transform: scale(1.05);
 }
+
+.text-just{
+    text-align: justify; 
+    text-justify: inter-word;
+}

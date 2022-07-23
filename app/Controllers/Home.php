@@ -28,4 +28,25 @@ class Home extends BaseController
       ];
       return view('adm/dashboard', $data);
     }
+
+    public function getCountRelease(){
+      $db = db_connect();
+        //$db->query("<YOUR QUERY HERE>");
+            $info= $db->query("select (select count(*) from `release`) as rel, 
+            (select count(*) from `event`) as evnt,
+            (select count(*) from `notice`) as noti,
+            (select count(*) from `message`) as msg")->getRow();
+
+            return $this->response->setJSON([
+               'error' => false,
+               'message' => $info
+           ]);
+
+/*
+        if ($info) {
+            echo json_encode(['code' => 1, 'msg' => '', 'results' => $info]);
+        } else {
+            echo json_encode(['code' => 0, 'msg' => 'No results found', 'results' => null]);
+        }*/
+    }
 }

@@ -21,7 +21,7 @@
         if ($(this).scrollTop() > 80) {
             $('.sticky-top').css('top', '0px');
         } else {
-            $('.sticky-top').css('top', '-100px');
+            $('.sticky-top').css('top', '-80px');
         }
     });
     

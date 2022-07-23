@@ -41,7 +41,7 @@ $routes->group('/', function($routes){
     });  
     $routes->get('events', 'Events::index');
     $routes->get('notices', 'Notices::index');
-    $routes->get('contact', 'Contact::index');
+    $routes->get('contact', 'Messages::index');
 });
 $routes->get('getReleaseLast','Release::getReleaseLast',['as'=>'get.release.last']);
 
@@ -52,6 +52,10 @@ $routes->get('getEvnt/(:num)','Events::getEvnt/$1', ['as'=>'get_evnt']);
 $routes->get('getNoticeLast','Notices::getNoticeLast',['as'=>'get.notice.last']);
 $routes->get('fetchNotices','Notices::fetchNotices', ['as'=>'fetch.notices']);
 $routes->get('getNotice/(:num)','Notices::getNotice/$1', ['as'=>'get_notice']);
+
+$routes->post('add','Messages::addMessage',['as'=>'add.message']);
+/*FIN DE RUTAS ESTATICAS */
+
 //RUTAS PARA EL ADMIN DE CONTENIDOS
 /*Autenticacion */
 $routes->group('admin', function($routes){
@@ -61,6 +65,7 @@ $routes->group('admin', function($routes){
         //RUTAS PROTEGIDAS
 $routes->group('admin', ['filter'=>'AuthCheck'], function ($routes) {
     $routes->get('dashboard','Home::dashboard');
+    $routes->get('getCountRelease','Home::getCountRelease',['as'=>'get_count_release']);
     $routes->get('signout', 'Auth::signout');
 
         //Comunicados
@@ -83,14 +88,25 @@ $routes->group('admin', ['filter'=>'AuthCheck'], function ($routes) {
         });
     
         //Noticias
-        $routes->group('notices', function ($routes) {
-            $routes->get('','Notices::notices',['as'=>'notices']);
+        $routes->group('noticias', function ($routes) {
+            $routes->get('','Notices::noticias',['as'=>'noticias']);
 	        $routes->post('add','Notices::addNotice',['as'=>'add.notice']);
             $routes->get('getAllNotices','Notices::getAllNotices',['as'=>'get.all.notices']);
             $routes->post('getNoticeInfo','Notices::getNoticeInfo',['as'=>'get.notice.info']);
             $routes->post('updateNotice','Notices::updateNotice',['as'=>'update.notice']);
             $routes->post('deleteNotice','Notices::deleteNotice',['as'=>'delete.notice']);
         });
+
+        //Noticias
+        $routes->group('messages', function ($routes) {
+            $routes->get('','Messages::messages',['as'=>'messages']);
+	        //$routes->post('add','Notices::addNotice',['as'=>'add.notice']);
+            $routes->get('getAllMessages','Messages::getAllMessages',['as'=>'get.all.messages']);
+            $routes->post('getMessageInfo','Messages::getMessageInfo',['as'=>'get.message.info']);
+            //$routes->post('updateNotice','Notices::updateNotice',['as'=>'update.notice']);
+            $routes->post('deleteMessage','Messages::deleteMessage',['as'=>'delete.message']);
+        });
+
         //Usuarios
         /*
         $routes->group('users', function ($routes) {
