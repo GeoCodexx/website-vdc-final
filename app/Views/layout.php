@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="<?= base_url('img/favicon.ico')?>" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +57,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Servicios</a>
                     <div class="dropdown-menu fade-down m-0">
-                        <a href="<?php echo base_url()?>/services/initial" class="dropdown-item">Inicial</a>
+                        <a href="#" class="dropdown-item">Inicial</a>
                         <a href="<?php echo base_url()?>/services/primary" class="dropdown-item">Primaria</a>
                     </div>
                 </div>
@@ -65,8 +65,9 @@
                 <a href="<?php echo base_url()?>/events" class="nav-item nav-link">Eventos</a>
                 <a href="<?php echo base_url()?>/notices" class="nav-item nav-link">Noticias</a>
                 <a href="<?php echo base_url()?>/contact" class="nav-item nav-link">Contáctanos</a>
+                
             </div>
-            <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Aula Virtual<i class="fa fa-arrow-right ms-3"></i></a>
+               <a href="#" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Aula Virtual<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -87,7 +88,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <h4 class="text-white mb-3">Contáctanos</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Prlng. Taylor , Cerrito de la Libertad, Huancayo</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Prlng. Taylor 1590, Cerrito de la Libertad - Huancayo</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+51 900011122</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@virgendelcarmen.com</p>
                     <div class="d-flex pt-2">
@@ -97,38 +98,6 @@
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                <!--
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Gallery</h4>
-                    <div class="row g-2 pt-2">
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/course-1.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/course-2.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/course-3.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/course-2.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/course-3.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/course-1.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <h4 class="text-white mb-3">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                    </div>
-                </div>-->
             </div>
         </div>
         <div class="container">
@@ -162,8 +131,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url('lib/wow/wow.min.js')?>"></script>
-    <script src="<?= base_url('lib/easing/easing.min.js')?>"></script>
-    <script src="<?= base_url('lib/waypoints/waypoints.min.js')?>"></script>
     <script src="<?= base_url('lib/owlcarousel/owl.carousel.min.js')?>"></script>
     <script src="<?= base_url('plugins/sweetalert2/sweetalert2.all.min.js'); ?>"></script>
     <!-- Template Javascript -->

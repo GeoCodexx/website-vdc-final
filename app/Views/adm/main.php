@@ -193,10 +193,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="<?= base_url('plugins/jquery/jquery.min.js'); ?>"></script>
   <script src="<?= base_url('plugins/bootstrap5/js/bootstrap.bundle.min.js'); ?>"></script>
-  <!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
--->
   <!--   Datatables  -->
   <script src="<?= base_url('plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
   <script src="<?= base_url('plugins/datatables-bs5/js/dataTables.bootstrap5.min.js'); ?>"></script>
